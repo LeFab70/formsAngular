@@ -1,0 +1,92 @@
+<div class="py-2">
+  <h2 class="text-center text-2xl">
+    form-model
+    <!-- <img ngSrc="www.example.com/image.png"  priority /> -->
+  </h2>
+  <form
+    novalidate
+    #loginForm="ngForm"
+    (ngSubmit)="onSubmit(loginForm)"
+    class="flex flex-col gap-4"
+  >
+    <div class="flex items-center space-x-3 justify-between">
+      <label for="UserName" class="basis-2/12">UserName</label>
+      <input
+        class="grow border ring-1 px-4 py-1 rounded-sm"
+        type="text"
+        id="UserName"
+        placeholder="Your UserName"
+        [(ngModel)]="userName"
+        name="userName"
+        #userNamevar="ngModel"
+        required
+        [ngClass]="{
+          'ring-red-700': userNamevar.touched && !userNamevar.valid,
+          'ring-2': userNamevar.touched && !userNamevar.valid
+        }"
+      />
+      @if (userNamevar.errors && userNamevar.dirty &&
+      userNamevar.touched&&!userNamevar.valid) {
+      <span class="text-red-500">entrez votre nom</span>
+      }
+    </div>
+    <div class="flex items-center space-x-3 justify-between">
+      <label for="password" class="basis-2/12">Password</label>
+      <input
+        #passwordValidators="ngModel"
+        class="grow border ring-1 px-4 py-1 rounded-sm"
+        name="password"
+        placeholder="Your password"
+        type="password"
+        id="password"
+        required
+        minlength="6"
+        [(ngModel)]="password"
+        [ngClass]="{
+          'ring-red-700':
+            passwordValidators.touched && !passwordValidators.valid,
+          'ring-2': passwordValidators.touched && !passwordValidators.valid
+        }"
+      />
+      @if (passwordValidators.hasError('required') && passwordValidators.dirty
+      && passwordValidators.touched) {
+      <span class="text-red-500">entrez votre mot de passe</span>
+      } @if (passwordValidators.hasError('minlength')) {
+      <span class="text-red-500">
+        votre mot de passe doit avoir 6 caracteres minimum</span
+      >
+      }
+    </div>
+    <button
+      type="submit"
+      [disabled]="!loginForm.valid"
+      [ngClass]="{
+        'bg-sky-100': !loginForm.valid,
+        'cursor-not-allowed': !loginForm.valid
+      }"
+      class="bg-sky-600 hover:bg-sky-800 transition ease-in-out duration-150 text-white font-bold uppercase py-1 px-6"
+    >
+      connexion
+    </button>
+    <div>
+      <label for="otherConnexion">
+        <input
+          [(ngModel)]="otherConnexion"
+          type="checkbox"
+          name="otherConnexion"
+          id="otherConnexion"
+        />
+        Choice another connexion mode
+      </label>
+    </div>
+    @if (otherConnexion) {
+    <div>
+      <input type="text" class="border-2" name="" id="" />
+    </div>
+    }
+  </form>
+  <p>Data:{{ data() | json }}</p>
+
+  {{ userName() }} : {{ password() }}
+  <hr />
+</div>

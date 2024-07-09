@@ -1,0 +1,68 @@
+<h1 class="text-center text-2xl">reactive-forms with just formControl</h1>
+<input
+  class="border ring-1 my-4 w-full rounded px-4 py-1"
+  type="email"
+  placeholder="input formcontrol sans formgroup and builder"
+  [formControl]="emailInfoLetter"
+/>
+<hr class="my-6" />
+<form
+  class="flex flex-col gap-4"
+  [formGroup]="registerForm"
+  (ngSubmit)="onSubmitForm()"
+>
+  @for (inputItem of inputList; track $index) {
+  <div class="flex items-center space-x-3 justify-between">
+    @if (inputItem.inputType==='checkbox') {
+    <div>
+      <label [for]="inputItem.inputName">
+        <input
+          formControlName="{{ inputItem.inputName }}"
+          type="checkbox"
+          [id]="inputItem.inputName"
+        />
+        {{ inputItem.inputName }}
+      </label>
+    </div>
+    }@else {
+    <label [for]="inputItem.inputName" class="basis-2/12">{{
+      inputItem.inputName
+    }}</label>
+    <input
+      class="grow border ring-1 px-4 py-1 rounded-sm"
+      [type]="inputItem.inputType"
+      [id]="inputItem.inputName"
+      [placeholder]="inputItem.inputName"
+      formControlName="{{ inputItem.inputName }}"
+    />
+    } @if (registerForm.get(inputItem.inputName)?.hasError('required') &&
+    registerForm.get(inputItem.inputName)?.touched &&
+    registerForm.get(inputItem.inputName)?.dirty) {
+    <span class="text-red-500">entrez {{ inputItem.inputName }}</span>
+    } @if (registerForm.get(inputItem.inputName)?.hasError('email') ) {
+    <span class="text-red-500"
+      >verifiez le format {{ inputItem.inputName }}</span
+    >
+    }
+  </div>
+  }
+  <button
+    type="submit"
+    [disabled]="!registerForm.valid"
+    class="disabled:cursor-not-allowed disabled:bg-gray-400 bg-sky-600 hover:bg-sky-800 transition ease-in-out duration-150 text-white font-bold uppercase py-1 px-6"
+  >
+    Register
+  </button>
+  <button
+    type="reset"
+    class="bg-sky-600 hover:bg-sky-800 transition ease-in-out duration-150 text-white font-bold uppercase py-1 px-6"
+  >
+    Reset form
+  </button>
+
+  @if (registerForm.get('subscribe')?.value) {
+  <div>
+    <input type="text" class="border-2" name="" id="" />
+  </div>
+  }
+</form>

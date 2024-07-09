@@ -1,0 +1,45 @@
+// * {
+//   padding: 2px;
+//   box-sizing: border-box;
+// }
+// h2 {
+//   text-align: center;
+// }
+// hr {
+//   border: 0.1rem solid gray;
+// }
+// form {
+//   margin-bottom: 2rem;
+//   display: flex;
+//  flex-direction: column;
+//  gap: 6px;
+//   .firstName {
+//     display: flex;
+
+//     align-items: center;
+//     text-transform: capitalize;
+//     flex: 1;
+//     input {
+//       flex-basis: 75%;
+//       border-radius: 5px;
+//       padding: 4px 6px;
+//     }
+//     label {
+//       flex-basis: 25%;
+//     }
+//   }
+//   button {
+    
+//     background: rgb(3, 78, 107);
+//     color: white;
+//     font-weight: bold;
+//     padding: 1px 6px;
+//     text-transform: uppercase;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     :hover {
+//       transition: ease-in-out 0.2ms;
+//       background: rgb(1, 22, 31);
+//     }
+//   }
+// }
